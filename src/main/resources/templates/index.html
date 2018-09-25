@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>AngularJS</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.js"></script>
+
+    <script th:src="@{/main.js}"></script>
+    <link th:href="@{/main.css}" rel="stylesheet" />
+
+    <head>
+<body ng-app="ContractManagement" ng-controller="ContractController">
+<h3>
+    CRUD: Spring Boot + Rest + AngularJS
+</h3>
+<form ng-submit="submitContract()">
+    <table border="0">
+        <tr>
+            <td>Серия</td>
+            <td><input type="text" ng-model="contractForm.series" /></td>
+        </tr>
+        <tr>
+            <td>Номер</td>
+            <td><input type="text" ng-model="contractForm.number" /></td>
+        </tr>
+        <tr>
+            <td>Тип договора</td>
+            <td><input type="text" ng-model="contractForm.typeContract.name" /></td>
+        </tr>
+        <tr>
+            <td>Дата подписания</td>
+            <td><input type="text" ng-model="contractForm.dateSignature" /></td>
+        </tr>
+        <tr>
+            <td>Начало действия</td>
+            <td><input type="text" ng-model="contractForm.dateStart" /></td>
+        </tr>
+        <tr>
+            <td>Конец действия</td>
+            <td><input type="text" ng-model="contractForm.dateEnd" /></td>
+        </tr>
+        <tr>
+            <td>Сумма без НДС, руб.</td>
+            <td><input type="text" ng-model="contractForm.sumWithoutVAT" /></td>
+        </tr>
+        <tr>
+            <td>Ставка НДС, %</td>
+            <td><input type="text" ng-model="contractForm.rateVAT" /></td>
+        </tr>
+        <tr>
+            <td>Сумма НДС, руб.</td>
+            <td><input type="text" ng-model="contractForm.sumVAT" /></td>
+        </tr>
+        <tr>
+            <td>Сумма с НДС, руб.</td>
+            <td><input type="text" ng-model="contractForm.sumWithVAT" /></td>
+        </tr>
+        <tr>
+            <td>Соответствие минимальной сумме</td>
+            <td><input type="text" ng-model="contractForm.conformMinSum" /></td>
+        </tr>
+        <tr>
+            <td>Номер ТС</td>
+            <td><input type="text" ng-model="contractForm.vehicle.name" /></td>
+        </tr>
+        <tr>
+            <td>Комментарий</td>
+            <td><input type="text" ng-model="contractForm.comment" /></td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="Применить" class="blue-button" />
+            </td>
+        </tr>
+    </table>
+</form>
+<br/>
+<a class="create-button" ng-click="createContract()">Создать договор</a>
+<table border="1">
+    <tr>
+        <th>Серия и номер</th>
+        <th>Тип договора</th>
+        <th>Дата подписания</th>
+        <th>Начало действия</th>
+        <th>Конец действия</th>
+        <th>Сумма без НДС, руб.</th>
+        <th>Ставка НДС, %</th>
+        <th>Сумма НДС, руб.</th>
+        <th>Сумма с НДС, руб.</th>
+        <th>Соответствие минимальной сумме</th>
+        <th>Номер ТС</th>
+        <th>Комментарий</th>
+        <th>Редактировать</th>
+        <th>Удалить</th>
+    </tr>
+    <!-- $scope.contracts -->
+    <tr ng-repeat="contract in contracts">
+        <td>{{ contract.series }} {{ contract.number }}</td>
+        <td>{{ contract.typeContract.name }}</td>
+        <td>{{ contract.dateSignature }}</td>
+        <td>{{ contract.dateStart }}</td>
+        <td>{{ contract.dateEnd }}</td>
+        <td>{{ contract.sumWithoutVAT }}</td>
+        <td>{{ contract.rateVAT }}</td>
+        <td>{{ contract.sumVAT }}</td>
+        <td>{{ contract.sumWithVAT }}</td>
+        <td>{{ contract.conformMinSum }}</td>
+        <td>{{ contract.vehicle.name }}</td>
+        <td>{{ contract.comment }}</td>
+        <td>
+            <a ng-click="editContract(contract)" class="edit-button">Редактировать</a>
+        </td>
+        <td>
+            <a ng-click="deleteContract(contract)" class="delete-button">Удалить</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
