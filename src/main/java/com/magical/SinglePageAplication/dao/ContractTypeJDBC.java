@@ -14,7 +14,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 @Repository
-public class ContractTypeJDBC {
+public class ContractTypeJDBC implements ContractTypeDAO {
     @Autowired
     DataSource dataSource;
     private JdbcTemplate jdbcTemplate;
@@ -47,7 +47,7 @@ public class ContractTypeJDBC {
     }
 
 
-    public List<ContractType> getAllContractTypes() {
+    public List<ContractType> getContractTypes() {
 
         System.out.println("VehicleJDBC: getAllVehicles  is called");
         final String QUERY_SQL = "SELECT * FROM contract_types";

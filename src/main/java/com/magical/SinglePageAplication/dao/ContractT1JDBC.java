@@ -16,7 +16,7 @@ import java.sql.SQLException;
 import java.util.*;
 
 @Repository
-public class ContractT1JDBC {
+public class ContractT1JDBC implements ContractDAO{
     @Autowired
     DataSource dataSource;
     private JdbcTemplate jdbcTemplate;
@@ -115,7 +115,7 @@ public class ContractT1JDBC {
 
 
     //JDBC TEMPLATE DELETE EXAMPLE
-    public boolean deleteContract(Long contrId) {
+    public boolean deleteContract(Integer contrId) {
         System.out.println("ContractT1JDBC: deleteContracts called");
         final String DELETE_SQL = "DELETE FROM contracts WHERE id LIKE ?";
         int result = jdbcTemplate.update(DELETE_SQL,new Object[]{contrId});
@@ -129,7 +129,7 @@ public class ContractT1JDBC {
     }
 
 
-    public List<ContractT1> getAllContracts() {
+    public List<ContractT1> getContracts() {
 
         System.out.println("ContractT1JDBC: getAllContracts  is called");
         final String QUERY_SQL = "SELECT * FROM contracts";

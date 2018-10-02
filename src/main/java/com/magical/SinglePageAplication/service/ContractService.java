@@ -1,8 +1,11 @@
 package com.magical.SinglePageAplication.service;
 
 import com.magical.SinglePageAplication.dao.ContractDAO;
+import com.magical.SinglePageAplication.dao.ContractTypeJDBC;
+import com.magical.SinglePageAplication.dao.VehicleJDBC;
 import com.magical.SinglePageAplication.model.ContractT1;
 import com.magical.SinglePageAplication.model.ContractT1Form;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -12,6 +15,8 @@ import java.util.List;
 public class ContractService {
 
     private ContractDAO contractDAO;
+    private VehicleJDBC vehicleJDBC;
+    private ContractTypeJDBC contractTypeJDBC;
 
     public ContractService(ContractDAO contrDAO){
         this.contractDAO = contrDAO;

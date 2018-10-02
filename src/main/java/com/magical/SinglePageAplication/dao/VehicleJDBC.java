@@ -16,7 +16,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 @Repository
-public class VehicleJDBC {
+public class VehicleJDBC implements VehicleDAO {
     @Autowired
     DataSource dataSource;
     private JdbcTemplate jdbcTemplate;
@@ -49,7 +49,7 @@ public class VehicleJDBC {
     }
 
 
-    public List<Vehicle> getAllVehicles() {
+    public List<Vehicle> getVehicles() {
 
         System.out.println("VehicleJDBC: getAllVehicles  is called");
         final String QUERY_SQL = "SELECT * FROM vehicles";
