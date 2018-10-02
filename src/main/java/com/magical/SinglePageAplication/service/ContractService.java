@@ -1,11 +1,10 @@
 package com.magical.SinglePageAplication.service;
 
-import com.magical.SinglePageAplication.dao.ContractDAO;
-import com.magical.SinglePageAplication.dao.ContractTypeJDBC;
-import com.magical.SinglePageAplication.dao.VehicleJDBC;
+import com.magical.SinglePageAplication.dao.*;
 import com.magical.SinglePageAplication.model.ContractT1;
 import com.magical.SinglePageAplication.model.ContractT1Form;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.magical.SinglePageAplication.model.ContractType;
+import com.magical.SinglePageAplication.model.Vehicle;
 
 import java.util.List;
 
@@ -15,11 +14,13 @@ import java.util.List;
 public class ContractService {
 
     private ContractDAO contractDAO;
-    private VehicleJDBC vehicleJDBC;
-    private ContractTypeJDBC contractTypeJDBC;
+    private VehicleDAO vehicleDAO;
+    private ContractTypeDAO contractTypeDAO;
 
-    public ContractService(ContractDAO contrDAO){
+    public ContractService(ContractDAO contrDAO, VehicleDAO vehicleDAO, ContractTypeDAO contractTypeDAO){
         this.contractDAO = contrDAO;
+        this.vehicleDAO = vehicleDAO;
+        this.contractTypeDAO = contractTypeDAO;
     }
 
     /**
@@ -64,5 +65,40 @@ public class ContractService {
     public boolean updateContract(ContractT1Form contractForm) {
         return contractDAO.updateContract(contractForm);
     }
+
+    /**
+     * Функция получения списка транспортных средств {@link Vehicle}
+     * @return
+     */
+    public List<Vehicle> getVehicles() {
+        return vehicleDAO.getVehicles();
+    }
+
+    /**
+     * Функция возвращает транспортное средство по его идентификатору
+     * @param vehicleId - идентификатор транспортного средства
+     * @return
+     */
+    public Vehicle getVehicle(Integer vehicleId) {
+        return vehicleDAO.getVehicle(vehicleId);
+    }
+
+    /**
+     * Функция возвращает тип договора по его идентификатору
+     * @param contrTypeId - идентификатор типа договора
+     * @return
+     */
+    public ContractType getContractType(Integer contrTypeId) {
+        return contractTypeDAO.getContractType(contrTypeId);
+    }
+
+    /**
+     * Функция возвращает список всех типов договоров
+     * @return
+     */
+    public List<ContractType> getContractTypes() {
+        return contractTypeDAO.getContractTypes();
+    }
+
 
 }

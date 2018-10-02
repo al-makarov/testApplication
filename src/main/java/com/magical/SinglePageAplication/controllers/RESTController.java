@@ -22,7 +22,7 @@ public class RESTController {
 
     @PostConstruct
     public void init() {
-        service = new ContractService(new ContractT1JDBC());
+        service = new ContractService(new ContractT1JDBC(), new VehicleJDBC(), new ContractTypeJDBC());
     }
 
     @RequestMapping(value = "/vehicles", //
@@ -31,7 +31,7 @@ public class RESTController {
                     MediaType.APPLICATION_XML_VALUE })
     @ResponseBody
     public List<Vehicle> getVehicles() {
-        List<Vehicle> list = vehicleJDBC.getAllVehicles();
+        List<Vehicle> list = service.getVehicles();
         return list;
     }
 
@@ -42,7 +42,7 @@ public class RESTController {
                     MediaType.APPLICATION_XML_VALUE })
     @ResponseBody
     public List<ContractType> getContractTypes() {
-        List<ContractType> listContrTypes = contractTypeJDBC.getAllContractTypes();
+        List<ContractType> listContrTypes = service.getContractTypes();
         return listContrTypes;
     }
 
