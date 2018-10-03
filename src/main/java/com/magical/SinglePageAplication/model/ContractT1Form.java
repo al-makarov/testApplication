@@ -8,9 +8,11 @@ public class ContractT1Form {
     private int id;
     @NotNull
     @Size(min=3, max=3, message="Длина поля 'Серия' должна составлять 3 символа")
+    @Pattern(regexp = "^[А-Яа-я]+$", message = "Только русские буквы")
     private String series;
     @NotNull
     @Max(8)
+    @Pattern(regexp = "^[а-яА-ЯёЁa-zA-Z0-9]+$", message = "Недопустимые символы")
     private String number;
     @NotNull
     private int typeContractId;
