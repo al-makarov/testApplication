@@ -18,10 +18,10 @@ public class ContractT1 {
     private double sumVAT;
     private double sumWithVAT;
 
-    private float sumWithoutVAT;
+   /* private double sumWithoutVAT;
     private int rateVAT;
     private boolean conformMinSum;
-
+    */
     private String comment;
 
     public ContractT1() {
@@ -120,11 +120,11 @@ public class ContractT1 {
         this.comment = comment;
     }
 
-    public float getSumWithoutVAT() {
+    /*public double getSumWithoutVAT() {
         return sumWithoutVAT;
     }
 
-    public void setSumWithoutVAT(float sumWithoutVAT) {
+    public void setSumWithoutVAT(double sumWithoutVAT) {
         this.sumWithoutVAT = sumWithoutVAT;
     }
 
@@ -142,7 +142,7 @@ public class ContractT1 {
 
     public void setConformMinSum(boolean conformMinSum) {
         this.conformMinSum = conformMinSum;
-    }
+    }*/
 
 
 }

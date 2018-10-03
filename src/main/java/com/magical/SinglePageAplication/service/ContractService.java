@@ -36,18 +36,28 @@ public class ContractService {
      * @return - экземпляр договора
      */
     public ContractT1 getContract(int contractId) {
+        /*ContractT1 contractTemp = contractDAO.getContract(contractId);
+        double sumWithoutVAT = contractTemp.getSumWithoutVAT() - contractTemp.getSumVAT();
+        contractTemp.setSumWithoutVAT(sumWithoutVAT);
+        int rateVAT = Math.round((float)( contractTemp.getSumVAT()/ (contractTemp.getSumWithVAT() - contractTemp.getSumVAT()) / 100));
+        contractTemp.setRateVAT(rateVAT);
+        */
+        //this.conformMinSum = (contrForm.getSumWithVAT() > 1000)? true : false;
+
         return contractDAO.getContract(contractId);
+
+
     }
 
     /**
      * Функция добавления нового договора в базу
-     * @param contract - экземпляр договора
+     * @param newContract - экземпляр договора
      * @return
      */
-    public boolean addContract(ContractT1Form contract) {
-        ContractT1 newContract = new ContractT1();
+    public boolean addContract(ContractT1Form newContract) {
+        //ContractT1 newContract = new ContractT1();
 
-        newContract.setSeries(contract.getSeries());
+        /*newContract.setSeries(contract.getSeries());
         newContract.setNumber(contract.getNumber());
         newContract.setDateSignature(contract.getDateSignature());
         newContract.setDateStart(contract.getDateStart());
@@ -57,7 +67,7 @@ public class ContractService {
         newContract.setComment(contract.getComment());
         newContract.setVehicle(contract.getVehicleId());
         newContract.setTypeContract(contract.getTypeContractId());
-
+        */
 
         // this.typeContract = contrForm.getTypeContract();
 
@@ -80,23 +90,10 @@ public class ContractService {
 
     /**
      * Функция обновления данных договора {@link ContractT1}
-     * @param contract - экземпляр формы договора
+     * @param updateContract - экземпляр формы договора
      * @return
      */
-    public boolean updateContract(ContractT1Form contract) {
-
-        ContractT1 updateContract = new ContractT1();
-        updateContract.setId(contract.getId());
-        updateContract.setSeries(contract.getSeries());
-        updateContract.setNumber(contract.getNumber());
-        updateContract.setDateSignature(contract.getDateSignature());
-        updateContract.setDateStart(contract.getDateStart());
-        updateContract.setDateEnd(contract.getDateEnd());
-        updateContract.setSumVAT(contract.getSumVAT());
-        updateContract.setSumWithVAT(contract.getSumWithVAT());
-        updateContract.setComment(contract.getComment());
-        updateContract.setVehicle(contract.getVehicleId());
-        updateContract.setTypeContract(contract.getTypeContractId());
+    public boolean updateContract(ContractT1Form updateContract) {
 
         return contractDAO.updateContract(updateContract);
     }
