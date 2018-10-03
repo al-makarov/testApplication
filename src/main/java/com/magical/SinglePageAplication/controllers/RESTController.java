@@ -1,8 +1,4 @@
 package com.magical.SinglePageAplication.controllers;
-
-import com.magical.SinglePageAplication.dao.ContractT1JDBC;
-import com.magical.SinglePageAplication.dao.ContractTypeJDBC;
-import com.magical.SinglePageAplication.dao.VehicleJDBC;
 import com.magical.SinglePageAplication.model.ContractT1;
 import com.magical.SinglePageAplication.model.ContractT1Form;
 import com.magical.SinglePageAplication.model.ContractType;
@@ -13,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 
 @RestController

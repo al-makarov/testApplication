@@ -18,10 +18,6 @@ public class ContractT1 {
     private double sumVAT;
     private double sumWithVAT;
 
-   /* private double sumWithoutVAT;
-    private int rateVAT;
-    private boolean conformMinSum;
-    */
     private String comment;
 
     public ContractT1() {

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
@@ -82,32 +81,13 @@ public class ContractT1JDBC implements ContractDAO{
                                     "sumWithVat = ?, vehicle = ?, comment = ?"+
                                     "   WHERE id = ?";
 
-        int result = jdbcTemplate.update(UPDATE_SQL,new Object[]{contractUpdate.getSeries()},
-                new Object[]{contractUpdate.getNumber()},
-                new Object[]{contractUpdate.getTypeContractId()},
-                new Object[]{contractUpdate.getDateSignature()},
-                new Object[]{contractUpdate.getDateStart()},
-                new Object[]{contractUpdate.getDateEnd()},
-                new Object[]{contractUpdate.getSumVAT()},
-                new Object[]{contractUpdate.getSumWithVAT()},
-                new Object[]{contractUpdate.getVehicleId()},
-                new Object[]{contractUpdate.getComment()},
-                new Object[]{contractUpdate.getId()}
-        );
+        int result = jdbcTemplate.update(UPDATE_SQL,
+                new Object[]{contractUpdate.getSeries(), contractUpdate.getNumber(),
+                            contractUpdate.getTypeContractId(), contractUpdate.getDateSignature(),
+                            contractUpdate.getDateStart(), contractUpdate.getDateEnd(), contractUpdate.getSumVAT(),
+                            contractUpdate.getSumWithVAT(), contractUpdate.getVehicleId(), contractUpdate.getComment(),
+                            contractUpdate.getId()});
 
-
-        /*int result = jdbcTemplate.update(UPDATE_SQL,new Object[]{contractUpdate.getSeries()},
-                new Object[]{contractUpdate.getNumber()},
-                new Object[]{contractUpdate.getTypeContractId()},
-                new Object[]{contractUpdate.getDateSignature()},
-                new Object[]{contractUpdate.getDateStart()},
-                new Object[]{contractUpdate.getDateEnd()},
-                new Object[]{contractUpdate.getSumVAT()},
-                new Object[]{contractUpdate.getSumWithVAT()},
-                new Object[]{contractUpdate.getVehicleId()},
-                new Object[]{contractUpdate.getComment()},
-                new Object[]{contractUpdate.getId()}
-        );*/
         if (result > 0) {
             System.out.println("User is updated: " + contractUpdate.getId());
             return true;
