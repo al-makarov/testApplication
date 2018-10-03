@@ -15,7 +15,6 @@ import java.sql.SQLException;
 import java.util.*;
 
 @Repository
-@Service
 public class ContractT1JDBC implements ContractDAO{
     @Autowired
     private DataSource dataSource;
@@ -104,6 +103,7 @@ public class ContractT1JDBC implements ContractDAO{
             System.out.println("User is updated: " + contractUpdate.getId());
             return true;
         } else {
+            System.out.println("ERROR User is NONE updated: " + contractUpdate.getId());
             return false;
         }
     }

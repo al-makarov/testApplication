@@ -21,11 +21,6 @@ public class RESTController {
     @Autowired
     private ContractService service;
 
-    @PostConstruct
-    public void init() {
-        //service = new ContractService(new ContractT1JDBC(), new VehicleJDBC(), new ContractTypeJDBC());
-    }
-
     @RequestMapping(value = "/vehicles", //
             method = RequestMethod.GET, //
             produces = { MediaType.APPLICATION_JSON_VALUE, //

@@ -24,7 +24,7 @@
         </tr>
         <tr>
             <td>Тип договора</td>
-            <td><input type="text" ng-model="contractForm.typeContract.name" /></td>
+            <td><input type="text" ng-model="contractForm.typeContractId" /></td>
         </tr>
         <tr>
             <td>Дата подписания</td>
@@ -39,14 +39,6 @@
             <td><input type="text" ng-model="contractForm.dateEnd" /></td>
         </tr>
         <tr>
-            <td>Сумма без НДС, руб.</td>
-            <td><input type="text" ng-model="contractForm.sumWithoutVAT" /></td>
-        </tr>
-        <tr>
-            <td>Ставка НДС, %</td>
-            <td><input type="text" ng-model="contractForm.rateVAT" /></td>
-        </tr>
-        <tr>
             <td>Сумма НДС, руб.</td>
             <td><input type="text" ng-model="contractForm.sumVAT" /></td>
         </tr>
@@ -55,12 +47,8 @@
             <td><input type="text" ng-model="contractForm.sumWithVAT" /></td>
         </tr>
         <tr>
-            <td>Соответствие минимальной сумме</td>
-            <td><input type="text" ng-model="contractForm.conformMinSum" /></td>
-        </tr>
-        <tr>
             <td>Номер ТС</td>
-            <td><input type="text" ng-model="contractForm.vehicle.name" /></td>
+            <td><input type="text" ng-model="contractForm.vehicleId" /></td>
         </tr>
         <tr>
             <td>Комментарий</td>
@@ -96,7 +84,7 @@
     <!-- $scope.contracts -->
     <tr ng-repeat="contract in contracts">
         <td>{{ contract.series }} {{ contract.number }}</td>
-        <td>{{ contract.typeContract.name }}</td>
+        <td>{{ contract.typeContractId }}</td>
         <td>{{ contract.dateSignature }}</td>
         <td>{{ contract.dateStart }}</td>
         <td>{{ contract.dateEnd }}</td>
@@ -105,7 +93,7 @@
         <td>{{ contract.sumVAT }}</td>
         <td>{{ contract.sumWithVAT }}</td>
         <td>{{ contract.conformMinSum }}</td>
-        <td>{{ contract.vehicle.name }}</td>
+        <td>{{ contract.vehicleId }}</td>
         <td>{{ contract.comment }}</td>
         <td>
             <a ng-click="editContract(contract)" class="edit-button">Редактировать</a>

@@ -114,16 +114,13 @@ app.controller("ContractController", function($scope, $http) {
         $scope.contractForm.id = -1;
         $scope.contractForm.series = "";
         $scope.contractForm.number = "";
-        $scope.contractForm.typeContract = "";
+        $scope.contractForm.typeContractId = "";
         $scope.contractForm.dateSignature = "";
         $scope.contractForm.dateStart = "";
         $scope.contractForm.dateEnd = "";
-        $scope.contractForm.sumWithoutVAT = "";
-        $scope.contractForm.rateVAT = "";
         $scope.contractForm.sumVAT = "";
         $scope.contractForm.sumWithVAT = "";
-        $scope.contractForm.conformMinSum = "";
-        $scope.contractForm.vehicle = "";
+        $scope.contractForm.vehicleId = "";
         $scope.contractForm.comment = "";
     };
 });
