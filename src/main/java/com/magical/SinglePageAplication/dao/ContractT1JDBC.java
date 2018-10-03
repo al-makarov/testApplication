@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
@@ -14,10 +15,10 @@ import java.sql.SQLException;
 import java.util.*;
 
 @Repository
+@Service
 public class ContractT1JDBC implements ContractDAO{
     @Autowired
     private DataSource dataSource;
-
     private JdbcTemplate jdbcTemplate;
 
     @PostConstruct

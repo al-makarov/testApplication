@@ -5,23 +5,29 @@ import com.magical.SinglePageAplication.model.ContractT1;
 import com.magical.SinglePageAplication.model.ContractT1Form;
 import com.magical.SinglePageAplication.model.ContractType;
 import com.magical.SinglePageAplication.model.Vehicle;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * Класс уровня сервиса Договоров
  */
+@Repository
 public class ContractService {
-
+    @Autowired
     private ContractDAO contractDAO;
+    @Autowired
     private VehicleDAO vehicleDAO;
+    @Autowired
     private ContractTypeDAO contractTypeDAO;
 
-    public ContractService(ContractDAO contrDAO, VehicleDAO vehicleDAO, ContractTypeDAO contractTypeDAO){
+   /* public ContractService(ContractDAO contrDAO, VehicleDAO vehicleDAO, ContractTypeDAO contractTypeDAO){
         this.contractDAO = contrDAO;
         this.vehicleDAO = vehicleDAO;
         this.contractTypeDAO = contractTypeDAO;
-    }
+    }*/
 
     /**
      * Функция получения списка всех договоров {@link ContractT1}

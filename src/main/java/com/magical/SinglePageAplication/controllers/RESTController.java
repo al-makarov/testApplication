@@ -9,6 +9,7 @@ import com.magical.SinglePageAplication.model.ContractType;
 import com.magical.SinglePageAplication.model.Vehicle;
 import com.magical.SinglePageAplication.service.ContractService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,12 +18,12 @@ import java.util.List;
 
 @RestController
 public class RESTController {
-
+    @Autowired
     private ContractService service;
 
     @PostConstruct
     public void init() {
-        service = new ContractService(new ContractT1JDBC(), new VehicleJDBC(), new ContractTypeJDBC());
+        //service = new ContractService(new ContractT1JDBC(), new VehicleJDBC(), new ContractTypeJDBC());
     }
 
     @RequestMapping(value = "/vehicles", //

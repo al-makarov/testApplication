@@ -9,7 +9,7 @@ app.controller("ContractController", function($scope, $http) {
         id: -1,
         series: "",
         number: "",
-        typeContract: "",
+        typeContractId: "",
         dateSignature: "",
         dateStart: "",
         dateEnd: "",
@@ -18,7 +18,7 @@ app.controller("ContractController", function($scope, $http) {
         sumVAT: "",
         sumWithVAT: "",
         conformMinSum: "",
-        vehicle: "",
+        vehicleId: "",
         comment: "",
     };
 
@@ -68,7 +68,7 @@ app.controller("ContractController", function($scope, $http) {
         $scope.contractForm.id = contract.id;
         $scope.contractForm.series = contract.series;
         $scope.contractForm.number = contract.number;
-        $scope.contractForm.typeContract = contract.typeContract;
+        $scope.contractForm.typeContractId = contract.typeContractId;
         $scope.contractForm.dateSignature = contract.dateSignature;
         $scope.contractForm.dateStart = contract.dateStart;
         $scope.contractForm.dateEnd = contract.dateEnd;
@@ -77,7 +77,7 @@ app.controller("ContractController", function($scope, $http) {
         $scope.contractForm.sumVAT = contract.sumVAT;
         $scope.contractForm.sumWithVAT = contract.sumWithVAT;
         $scope.contractForm.conformMinSum = contract.conformMinSum;
-        $scope.contractForm.vehicle = contract.vehicle;
+        $scope.contractForm.vehicleId = contract.vehicleId;
         $scope.contractForm.comment = contract.comment;
     };
 
