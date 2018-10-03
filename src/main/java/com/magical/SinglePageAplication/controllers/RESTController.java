@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -61,7 +62,7 @@ public class RESTController {
             produces = { MediaType.APPLICATION_JSON_VALUE, //
                     MediaType.APPLICATION_XML_VALUE })
     @ResponseBody
-    boolean addContract(@RequestBody ContractT1Form contrForm) {
+    boolean addContract(@RequestBody @Valid ContractT1Form contrForm) {
         System.out.println("(Service Side) Creating Contract with contrNo: " + contrForm.getSeries() + contrForm.getNumber());
         return service.addContract(contrForm);
     }
@@ -72,7 +73,7 @@ public class RESTController {
             produces = { MediaType.APPLICATION_JSON_VALUE, //
                     MediaType.APPLICATION_XML_VALUE })
     @ResponseBody
-    boolean  updateContract(@RequestBody ContractT1Form contrForm) {
+    boolean  updateContract(@RequestBody @Valid ContractT1Form contrForm) {
 
         System.out.println("(Service Side) Editing contract with Id: " + contrForm.getId());
         return service.updateContract(contrForm);

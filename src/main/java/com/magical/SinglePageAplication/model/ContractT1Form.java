@@ -1,20 +1,31 @@
 package com.magical.SinglePageAplication.model;
 
 
+import javax.validation.constraints.*;
 import java.util.Date;
 
 public class ContractT1Form {
     private int id;
+    @NotNull
+    @Size(min=3, max=3, message="Длина поля 'Серия' должна составлять 3 символа")
     private String series;
+    @NotNull
+    @Max(8)
     private String number;
+    @NotNull
     private int typeContractId;
+
+    @NotNull
+    @PastOrPresent
     private Date dateSignature;
+    @NotNull
     private Date dateStart;
     private Date dateEnd;
-
+    @NotNull
     private float sumVAT;
+    @NotNull
     private float sumWithVAT;
-
+    @NotNull
     private int vehicleId;
     private String comment;
 
