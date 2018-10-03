@@ -1,0 +1,30 @@
+CREATE TABLE `contract_types` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+)
+
+CREATE TABLE `vehicles` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `number` varchar(8) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+)
+
+CREATE TABLE `contracts` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `series` varchar(3) DEFAULT NULL,
+  `number` varchar(8) DEFAULT NULL,
+  `typeContract` int(11) DEFAULT NULL,
+  `dateSignature` date DEFAULT NULL,
+  `dateStart` date DEFAULT NULL,
+  `dateEnd` date DEFAULT NULL,
+  `sumWithVAT` float DEFAULT NULL,
+  `sumVAT` float DEFAULT NULL,
+  `vehicle` int(11) DEFAULT NULL,
+  `comment` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `vehicle_idx` (`vehicle`),
+  KEY `typeContract_idx` (`typeContract`),
+  CONSTRAINT `typeContract` FOREIGN KEY (`typeContract`) REFERENCES `contract_types` (`id`),
+  CONSTRAINT `vehicle` FOREIGN KEY (`vehicle`) REFERENCES `vehicles` (`id`)
+)

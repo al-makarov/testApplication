@@ -35,17 +35,7 @@ public class ContractService {
      * @return - экземпляр договора
      */
     public ContractT1 getContract(int contractId) {
-        /*ContractT1 contractTemp = contractDAO.getContract(contractId);
-        double sumWithoutVAT = contractTemp.getSumWithoutVAT() - contractTemp.getSumVAT();
-        contractTemp.setSumWithoutVAT(sumWithoutVAT);
-        int rateVAT = Math.round((float)( contractTemp.getSumVAT()/ (contractTemp.getSumWithVAT() - contractTemp.getSumVAT()) / 100));
-        contractTemp.setRateVAT(rateVAT);
-        */
-        //this.conformMinSum = (contrForm.getSumWithVAT() > 1000)? true : false;
-
         return contractDAO.getContract(contractId);
-
-
     }
 
     /**
@@ -54,27 +44,6 @@ public class ContractService {
      * @return
      */
     public boolean addContract(ContractT1Form newContract) {
-        //ContractT1 newContract = new ContractT1();
-
-        /*newContract.setSeries(contract.getSeries());
-        newContract.setNumber(contract.getNumber());
-        newContract.setDateSignature(contract.getDateSignature());
-        newContract.setDateStart(contract.getDateStart());
-        newContract.setDateEnd(contract.getDateEnd());
-        newContract.setSumVAT(contract.getSumVAT());
-        newContract.setSumWithVAT(contract.getSumWithVAT());
-        newContract.setComment(contract.getComment());
-        newContract.setVehicle(contract.getVehicleId());
-        newContract.setTypeContract(contract.getTypeContractId());
-        */
-
-        // this.typeContract = contrForm.getTypeContract();
-
-        //this.sumWithoutVAT = contrForm.getSumWithVAT() - contrForm.getSumVAT();
-        //this.rateVAT = Math.round((float)( contrForm.getSumVAT()/ (contrForm.getSumWithVAT() - contrForm.getSumVAT()) / 100));
-
-        //this.conformMinSum = (contrForm.getSumWithVAT() > 1000)? true : false;
-
         return contractDAO.addContract(newContract);
     }
 
