@@ -1,8 +1,5 @@
 package com.magical.SinglePageAplication.dao;
 
-import com.magical.SinglePageAplication.model.ContractT1;
-import com.magical.SinglePageAplication.model.ContractT1Form;
-import com.magical.SinglePageAplication.model.ContractType;
 import com.magical.SinglePageAplication.model.Vehicle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;

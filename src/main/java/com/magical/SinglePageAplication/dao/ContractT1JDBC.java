@@ -16,12 +16,10 @@ import java.util.*;
 @Repository
 public class ContractT1JDBC implements ContractDAO{
     @Autowired
-    DataSource dataSource;
+    private DataSource dataSource;
+
     private JdbcTemplate jdbcTemplate;
-    @Autowired
-    private VehicleJDBC vehicleJDBC;
-    @Autowired
-    private ContractTypeJDBC contractTypeJDBC;
+
     @PostConstruct
     public void init() {
         System.out.println("JDBCExample postConstruct is called. datasource = " + dataSource);
@@ -132,6 +130,7 @@ public class ContractT1JDBC implements ContractDAO{
         List<ContractT1> contractList = this.jdbcTemplate.query(QUERY_SQL, new RowMapper<ContractT1>() {
             public ContractT1 mapRow(ResultSet resultSet, int rowNum) throws SQLException {
                 ContractT1 contractTemp = new ContractT1();
+
                     contractTemp.setId(resultSet.getInt("id"));
                     contractTemp.setSeries(resultSet.getString("series"));
                     contractTemp.setNumber(resultSet.getString("number"));
@@ -140,8 +139,8 @@ public class ContractT1JDBC implements ContractDAO{
                     contractTemp.setDateStart(resultSet.getDate("dateStart"));
                     contractTemp.setDateEnd(resultSet.getDate("dateEnd"));
                     contractTemp.setDateSignature(resultSet.getDate("dateSignature"));
-                    contractTemp.setSumWithVAT(resultSet.getFloat("sumWithVAT"));
-                    contractTemp.setSumVAT(resultSet.getFloat("sumVAT"));
+                    contractTemp.setSumWithVAT(resultSet.getDouble("sumWithVAT"));
+                    contractTemp.setSumVAT(resultSet.getDouble("sumVAT"));
                     contractTemp.setComment(resultSet.getString("comment"));
 
                 return contractTemp;

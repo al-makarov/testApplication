@@ -90,7 +90,7 @@ public class ContractT1 {
         return sumVAT;
     }
 
-    public void setSumVAT(float sumVAT) {
+    public void setSumVAT(double sumVAT) {
         this.sumVAT = sumVAT;
     }
 
@@ -98,7 +98,7 @@ public class ContractT1 {
         return sumWithVAT;
     }
 
-    public void setSumWithVAT(float sumWithVAT) {
+    public void setSumWithVAT(double sumWithVAT) {
         this.sumWithVAT = sumWithVAT;
     }
 
