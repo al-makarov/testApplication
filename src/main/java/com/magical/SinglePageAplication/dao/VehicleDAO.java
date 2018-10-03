@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface VehicleDAO {
     Vehicle getVehicle(Integer vehicleId);
+    Vehicle getVehicle(String vehId);
     List<Vehicle> getVehicles();
 }

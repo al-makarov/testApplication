@@ -11,11 +11,10 @@ public class ContractT1Form {
     private Date dateSignature;
     private Date dateStart;
     private Date dateEnd;
-    private float sumWithoutVAT;
-    private int rateVAT;
+
     private float sumVAT;
     private float sumWithVAT;
-    private boolean conformMinSum;
+
     private int vehicleId;
     private String comment;
 
@@ -75,21 +74,6 @@ public class ContractT1Form {
         this.dateEnd = dateEnd;
     }
 
-    public float getSumWithoutVAT() {
-        return sumWithoutVAT;
-    }
-
-    public void setSumWithoutVAT(float sumWithoutVAT) {
-        this.sumWithoutVAT = sumWithoutVAT;
-    }
-
-    public int getRateVAT() {
-        return rateVAT;
-    }
-
-    public void setRateVAT(int rateVAT) {
-        this.rateVAT = rateVAT;
-    }
 
     public float getSumVAT() {
         return sumVAT;
@@ -107,15 +91,7 @@ public class ContractT1Form {
         this.sumWithVAT = sumWithVAT;
     }
 
-    public boolean isConformMinSum() {
-        return conformMinSum;
-    }
-
-    public void setConformMinSum(boolean conformMinSum) {
-        this.conformMinSum = conformMinSum;
-    }
-
-    public int getVehicle() {
+    public int getVehicleId() {
         return vehicleId;
     }
 

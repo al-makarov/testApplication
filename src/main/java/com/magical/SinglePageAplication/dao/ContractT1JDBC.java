@@ -36,20 +36,19 @@ public class ContractT1JDBC implements ContractDAO{
 
         List<ContractT1> contractList = this.jdbcTemplate.query(QUERY_SQL, new RowMapper<ContractT1>() {
             public ContractT1 mapRow(ResultSet resultSet, int rowNum) throws SQLException {
-                ContractT1 contr = new ContractT1(
-                        resultSet.getInt("id"),
-                        resultSet.getString("series"),
-                        resultSet.getString("number"),
-                        contractTypeJDBC.getContractType(resultSet.getString("typeContract")),
-                        resultSet.getDate("dateSignature"),
-                        resultSet.getDate("dateStart"),
-                        resultSet.getDate("dateEnd"),
-                        resultSet.getDouble("sumWithVAT"),
-                        resultSet.getDouble("sumVAT"),
-                        vehicleJDBC.getVehicle(resultSet.getString("vehicle")),
-                        resultSet.getString("comment")
-                );
-                return contr;
+                ContractT1 contractTemp = new ContractT1();
+                contractTemp.setId(resultSet.getInt("id"));
+                contractTemp.setSeries(resultSet.getString("series"));
+                contractTemp.setNumber(resultSet.getString("number"));
+                contractTemp.setTypeContract(resultSet.getInt("typeContract"));
+                contractTemp.setVehicle(resultSet.getInt("vehicle"));
+                contractTemp.setDateStart(resultSet.getDate("dateStart"));
+                contractTemp.setDateEnd(resultSet.getDate("dateEnd"));
+                contractTemp.setDateSignature(resultSet.getDate("dateSignature"));
+                contractTemp.setSumWithVAT(resultSet.getFloat("sumWithVAT"));
+                contractTemp.setSumVAT(resultSet.getFloat("sumVAT"));
+                contractTemp.setComment(resultSet.getString("comment"));
+                return contractTemp;
             }
         });
         return contractList.get(0);
@@ -69,7 +68,7 @@ public class ContractT1JDBC implements ContractDAO{
                                         new Object[]{contrForm.getDateEnd()},
                                         new Object[]{contrForm.getSumVAT()},
                                         new Object[]{contrForm.getSumWithVAT()},
-                                        new Object[]{contrForm.getVehicle()},
+                                        new Object[]{contrForm.getVehicleId()},
                                         new Object[]{contrForm.getComment()});
         if (result > 0) {
             System.out.println("Contract is inserted: " + contrForm.getSeries()+contrForm.getNumber());
@@ -81,7 +80,7 @@ public class ContractT1JDBC implements ContractDAO{
 
 
     //JDBC TEMPLATE UPDATE EXAMPLE
-    public boolean updateContract(ContractT1Form contr)  {
+    public boolean updateContract(ContractT1Form contractUpdate)  {
         System.out.println("contractT1JDBC: updateContract called");
 
         final String UPDATE_SQL = "UPDATE contracts SET series = ?, number = ?,"+
@@ -90,20 +89,20 @@ public class ContractT1JDBC implements ContractDAO{
                                     "sumWithVat = ?, vehicle = ?, comment = ?"+
                                     "   WHERE id = ?";
 
-        int result = jdbcTemplate.update(UPDATE_SQL,new Object[]{contr.getSeries()},
-                                                    new Object[]{contr.getNumber()},
-                                                    new Object[]{contr.getTypeContractId()},
-                                                    new Object[]{contr.getDateSignature()},
-                                                    new Object[]{contr.getDateStart()},
-                                                    new Object[]{contr.getDateEnd()},
-                                                    new Object[]{contr.getSumVAT()},
-                                                    new Object[]{contr.getSumWithVAT()},
-                                                    new Object[]{contr.getVehicle()},
-                                                    new Object[]{contr.getComment()},
-                                                    new Object[]{contr.getId()}
+        int result = jdbcTemplate.update(UPDATE_SQL,new Object[]{contractUpdate.getSeries()},
+                                                    new Object[]{contractUpdate.getNumber()},
+                                                    new Object[]{contractUpdate.getTypeContractId()},
+                                                    new Object[]{contractUpdate.getDateSignature()},
+                                                    new Object[]{contractUpdate.getDateStart()},
+                                                    new Object[]{contractUpdate.getDateEnd()},
+                                                    new Object[]{contractUpdate.getSumVAT()},
+                                                    new Object[]{contractUpdate.getSumWithVAT()},
+                                                    new Object[]{contractUpdate.getVehicleId()},
+                                                    new Object[]{contractUpdate.getComment()},
+                                                    new Object[]{contractUpdate.getId()}
                                                     );
         if (result > 0) {
-            System.out.println("User is updated: " + contr.getId());
+            System.out.println("User is updated: " + contractUpdate.getId());
             return true;
         } else {
             return false;
@@ -128,28 +127,24 @@ public class ContractT1JDBC implements ContractDAO{
 
 
     public List<ContractT1> getContracts() {
-
         System.out.println("ContractT1JDBC: getAllContracts  is called");
         final String QUERY_SQL = "SELECT * FROM contracts";
-
         List<ContractT1> contractList = this.jdbcTemplate.query(QUERY_SQL, new RowMapper<ContractT1>() {
             public ContractT1 mapRow(ResultSet resultSet, int rowNum) throws SQLException {
-                ContractT1 contr = new ContractT1(
-                        resultSet.getInt("id"),
-                        resultSet.getString("series"),
-                        resultSet.getString("number"),
-                        /* TODO: Исправить вложенный запрос */
-                        contractTypeJDBC.getContractType(resultSet.getString("typeContract")),
-                        resultSet.getDate("dateSignature"),
-                        resultSet.getDate("dateStart"),
-                        resultSet.getDate("dateEnd"),
-                        resultSet.getDouble("sumWithVAT"),
-                        resultSet.getDouble("sumVAT"),
-                        /* TODO: Исправить вложенный запрос */
-                        vehicleJDBC.getVehicle(resultSet.getString("vehicle")),
-                        resultSet.getString("comment")
-                    );
-                return contr;
+                ContractT1 contractTemp = new ContractT1();
+                    contractTemp.setId(resultSet.getInt("id"));
+                    contractTemp.setSeries(resultSet.getString("series"));
+                    contractTemp.setNumber(resultSet.getString("number"));
+                    contractTemp.setTypeContract(resultSet.getInt("typeContract"));
+                    contractTemp.setVehicle(resultSet.getInt("vehicle"));
+                    contractTemp.setDateStart(resultSet.getDate("dateStart"));
+                    contractTemp.setDateEnd(resultSet.getDate("dateEnd"));
+                    contractTemp.setDateSignature(resultSet.getDate("dateSignature"));
+                    contractTemp.setSumWithVAT(resultSet.getFloat("sumWithVAT"));
+                    contractTemp.setSumVAT(resultSet.getFloat("sumVAT"));
+                    contractTemp.setComment(resultSet.getString("comment"));
+
+                return contractTemp;
             }
         });
         return contractList;
