@@ -33,7 +33,8 @@ public class ContractService {
      * Функция получения списка всех договоров {@link ContractT1}
      */
     public List<ContractT1> getContracts() {
-        return contractDAO.getContracts();
+        List<ContractT1> list = contractDAO.getContracts();
+        return list;
     }
 
     /**

@@ -53,11 +53,11 @@ public class ContractT1 {
         this.number = number;
     }
 
-    public int getTypeContract() {
+    public int getTypeContractId() {
         return typeContractId;
     }
 
-    public void setTypeContract(int typeContract) {
+    public void setTypeContractId(int typeContract) {
         this.typeContractId = typeContract;
     }
 
@@ -104,11 +104,11 @@ public class ContractT1 {
 
 
 
-    public int getVehicle() {
+    public int getVehicleId() {
         return vehicleId;
     }
 
-    public void setVehicle(int vehicle) {
+    public void setVehicleId(int vehicle) {
         this.vehicleId = vehicle;
     }
 

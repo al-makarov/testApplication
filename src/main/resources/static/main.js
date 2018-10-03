@@ -13,11 +13,8 @@ app.controller("ContractController", function($scope, $http) {
         dateSignature: "",
         dateStart: "",
         dateEnd: "",
-        sumWithoutVAT: "",
-        rateVAT: "",
         sumVAT: "",
         sumWithVAT: "",
-        conformMinSum: "",
         vehicleId: "",
         comment: "",
     };

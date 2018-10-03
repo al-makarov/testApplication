@@ -38,8 +38,8 @@ public class ContractT1JDBC implements ContractDAO{
                 contractTemp.setId(resultSet.getInt("id"));
                 contractTemp.setSeries(resultSet.getString("series"));
                 contractTemp.setNumber(resultSet.getString("number"));
-                contractTemp.setTypeContract(resultSet.getInt("typeContract"));
-                contractTemp.setVehicle(resultSet.getInt("vehicle"));
+                contractTemp.setTypeContractId(resultSet.getInt("typeContract"));
+                contractTemp.setVehicleId(resultSet.getInt("vehicle"));
                 contractTemp.setDateStart(resultSet.getDate("dateStart"));
                 contractTemp.setDateEnd(resultSet.getDate("dateEnd"));
                 contractTemp.setDateSignature(resultSet.getDate("dateSignature"));
@@ -58,16 +58,11 @@ public class ContractT1JDBC implements ContractDAO{
                                     "dateStart, dateEnd, sumVat,sumWithVat,vehicle,comment)"+
                                     " VALUES (?,?,?,?,?,?,?,?,?,?)";
         int result = jdbcTemplate.update(INSERT_SQL,
-                                        new Object[]{contrForm.getSeries()},
-                                        new Object[]{contrForm.getNumber()},
-                                        new Object[]{contrForm.getTypeContractId()},
-                                        new Object[]{contrForm.getDateSignature()},
-                                        new Object[]{contrForm.getDateStart()},
-                                        new Object[]{contrForm.getDateEnd()},
-                                        new Object[]{contrForm.getSumVAT()},
-                                        new Object[]{contrForm.getSumWithVAT()},
-                                        new Object[]{contrForm.getVehicleId()},
-                                        new Object[]{contrForm.getComment()});
+            new Object[]{contrForm.getSeries(), contrForm.getNumber(),
+                    contrForm.getTypeContractId(), contrForm.getDateSignature(),
+                    contrForm.getDateStart(), contrForm.getDateEnd(),
+                    contrForm.getSumVAT(), contrForm.getSumWithVAT(),
+                    contrForm.getVehicleId(), contrForm.getComment()});
         if (result > 0) {
             System.out.println("Contract is inserted: " + contrForm.getSeries()+contrForm.getNumber());
             return true;
@@ -88,17 +83,31 @@ public class ContractT1JDBC implements ContractDAO{
                                     "   WHERE id = ?";
 
         int result = jdbcTemplate.update(UPDATE_SQL,new Object[]{contractUpdate.getSeries()},
-                                                    new Object[]{contractUpdate.getNumber()},
-                                                    new Object[]{contractUpdate.getTypeContractId()},
-                                                    new Object[]{contractUpdate.getDateSignature()},
-                                                    new Object[]{contractUpdate.getDateStart()},
-                                                    new Object[]{contractUpdate.getDateEnd()},
-                                                    new Object[]{contractUpdate.getSumVAT()},
-                                                    new Object[]{contractUpdate.getSumWithVAT()},
-                                                    new Object[]{contractUpdate.getVehicleId()},
-                                                    new Object[]{contractUpdate.getComment()},
-                                                    new Object[]{contractUpdate.getId()}
-                                                    );
+                new Object[]{contractUpdate.getNumber()},
+                new Object[]{contractUpdate.getTypeContractId()},
+                new Object[]{contractUpdate.getDateSignature()},
+                new Object[]{contractUpdate.getDateStart()},
+                new Object[]{contractUpdate.getDateEnd()},
+                new Object[]{contractUpdate.getSumVAT()},
+                new Object[]{contractUpdate.getSumWithVAT()},
+                new Object[]{contractUpdate.getVehicleId()},
+                new Object[]{contractUpdate.getComment()},
+                new Object[]{contractUpdate.getId()}
+        );
+
+
+        /*int result = jdbcTemplate.update(UPDATE_SQL,new Object[]{contractUpdate.getSeries()},
+                new Object[]{contractUpdate.getNumber()},
+                new Object[]{contractUpdate.getTypeContractId()},
+                new Object[]{contractUpdate.getDateSignature()},
+                new Object[]{contractUpdate.getDateStart()},
+                new Object[]{contractUpdate.getDateEnd()},
+                new Object[]{contractUpdate.getSumVAT()},
+                new Object[]{contractUpdate.getSumWithVAT()},
+                new Object[]{contractUpdate.getVehicleId()},
+                new Object[]{contractUpdate.getComment()},
+                new Object[]{contractUpdate.getId()}
+        );*/
         if (result > 0) {
             System.out.println("User is updated: " + contractUpdate.getId());
             return true;
@@ -135,8 +144,8 @@ public class ContractT1JDBC implements ContractDAO{
                     contractTemp.setId(resultSet.getInt("id"));
                     contractTemp.setSeries(resultSet.getString("series"));
                     contractTemp.setNumber(resultSet.getString("number"));
-                    contractTemp.setTypeContract(resultSet.getInt("typeContract"));
-                    contractTemp.setVehicle(resultSet.getInt("vehicle"));
+                    contractTemp.setTypeContractId(resultSet.getInt("typeContract"));
+                    contractTemp.setVehicleId(resultSet.getInt("vehicle"));
                     contractTemp.setDateStart(resultSet.getDate("dateStart"));
                     contractTemp.setDateEnd(resultSet.getDate("dateEnd"));
                     contractTemp.setDateSignature(resultSet.getDate("dateSignature"));
