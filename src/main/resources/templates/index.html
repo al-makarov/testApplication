@@ -6,7 +6,7 @@
 
     <script th:src="@{/main.js}"></script>
     <link th:href="@{/main.css}" rel="stylesheet" />
-
+    <div th:replace="fragments/header :: header-css"/>
     <head>
 <body ng-app="ContractManagement" ng-controller="ContractController">
 <div th:replace="fragments/header :: header"/>
