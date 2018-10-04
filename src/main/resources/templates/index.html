@@ -1,12 +1,10 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>AngularJS</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.js"></script>
-
-    <script th:src="@{/main.js}"></script>
-    <link th:href="@{/main.css}" rel="stylesheet" />
+    <title>Contracts main page</title>
     <div th:replace="fragments/header :: header-css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.js"></script>
+    <script th:src="@{/main.js}"></script>
     <head>
 <body ng-app="ContractManagement" ng-controller="ContractController">
 <div th:replace="fragments/header :: header"/>
