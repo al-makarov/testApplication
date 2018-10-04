@@ -9,6 +9,7 @@
 
     <head>
 <body ng-app="ContractManagement" ng-controller="ContractController">
+<div th:replace="fragments/header :: header"/>
 <h3>
     CRUD: Spring Boot + Rest + AngularJS
 </h3>
@@ -103,5 +104,6 @@
         </td>
     </tr>
 </table>
+<div th:replace="fragments/footer :: footer"/>
 </body>
 </html>
