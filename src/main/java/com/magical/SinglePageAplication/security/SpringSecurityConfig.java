@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.access.AccessDeniedHandler;
 
@@ -14,10 +15,16 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private AccessDeniedHandler accessDeniedHandler;
 
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/webjars/**","/main.css");
+    }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.csrf().disable()
+        http.csrf()
+                .disable()
                 .authorizeRequests()
                 .antMatchers("/contracts","/index","/contract/*").hasAnyRole("ADMIN")
                 .anyRequest().authenticated()
@@ -30,6 +37,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .exceptionHandling().accessDeniedHandler(accessDeniedHandler);
+
     }
 
     // создаем пользоватлелей, admin и user
