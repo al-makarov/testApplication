@@ -19,7 +19,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/**","/").hasAnyRole("ADMIN")
+                .antMatchers("/contracts","/index","/contract/*").hasAnyRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -35,6 +35,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     // создаем пользоватлелей, admin и user
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("admin").password("test").roles("ADMIN");
+        auth.inMemoryAuthentication().withUser("admin").password("{noop}test").roles("ADMIN");
     }
 }
