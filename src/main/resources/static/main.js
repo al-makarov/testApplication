@@ -22,8 +22,7 @@ app.controller("ContractController", function($scope, $http) {
     // Now load the data from server
     _refreshContractData();
 
-    // HTTP POST/PUT methods for add/edit employee
-    // Call: http://localhost:8080/employee
+
     $scope.submitContract = function() {
 
         var method = "";
@@ -51,8 +50,7 @@ app.controller("ContractController", function($scope, $http) {
         _clearFormData();
     }
 
-    // HTTP DELETE- delete employee by Id
-    // Call: http://localhost:8080/employee/{empId}
+
     $scope.deleteContract = function(contract) {
         $http({
             method: 'DELETE',
