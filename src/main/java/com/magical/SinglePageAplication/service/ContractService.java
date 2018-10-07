@@ -110,7 +110,7 @@ public class ContractService {
      * Функция расчитывает вычисляемые параметры для договора
      * @param contract - экземпляр договора
      */
-    private void calculateParams(ContractT1 contract) {
+    public void calculateParams(ContractT1 contract) {
         contract.setSumWithoutVAT(calcSumWithoutVAT(contract.getSumVAT(),contract.getSumWithVAT()));
         contract.setRateVAT(calcRateVAT(contract.getSumWithVAT(),contract.getSumVAT()));
         contract.setConformMinSum(confirmMinSum(contract.getSumWithVAT()));
@@ -121,7 +121,7 @@ public class ContractService {
      * @param sumWithVAT - сумма с НДС
      * @return
      */
-    private boolean confirmMinSum(double sumWithVAT) {
+    public boolean confirmMinSum(double sumWithVAT) {
         return sumWithVAT > 1000;
     }
 
@@ -131,7 +131,7 @@ public class ContractService {
      * @param sumWithVAT - сумма с НДС
      * @return
      */
-    private double calcSumWithoutVAT(double sumVAT, double sumWithVAT) {
+    public double calcSumWithoutVAT(double sumVAT, double sumWithVAT) {
         return sumWithVAT - sumVAT;
     }
 
@@ -141,7 +141,7 @@ public class ContractService {
      * @param sumVAT - сумма НДС
      * @return
      */
-    private int calcRateVAT(double sumWithVAT, double sumVAT) {
+    public int calcRateVAT(double sumWithVAT, double sumVAT) {
         return (int)Math.round(sumVAT * 100 / sumWithVAT);
     }
 
