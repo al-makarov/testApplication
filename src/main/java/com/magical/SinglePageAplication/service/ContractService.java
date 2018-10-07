@@ -26,6 +26,10 @@ public class ContractService {
      */
     public List<ContractT1> getContracts() {
         List<ContractT1> list = contractDAO.getContracts();
+
+        for(ContractT1 contract: list){
+            calculateParams(contract);
+        }
         return list;
     }
 
@@ -35,7 +39,9 @@ public class ContractService {
      * @return - экземпляр договора
      */
     public ContractT1 getContract(int contractId) {
-        return contractDAO.getContract(contractId);
+        ContractT1 contract = contractDAO.getContract(contractId);
+        calculateParams(contract);
+        return contract;
     }
 
     /**
@@ -98,6 +104,45 @@ public class ContractService {
      */
     public List<ContractType> getContractTypes() {
         return contractTypeDAO.getContractTypes();
+    }
+
+    /**
+     * Функция расчитывает вычисляемые параметры для договора
+     * @param contract - экземпляр договора
+     */
+    private void calculateParams(ContractT1 contract) {
+        contract.setSumWithoutVAT(calcSumWithoutVAT(contract.getSumVAT(),contract.getSumWithVAT()));
+        contract.setRateVAT(calcRateVAT(contract.getSumWithVAT(),contract.getSumVAT()));
+        contract.setConformMinSum(confirmMinSum(contract.getSumWithVAT()));
+    }
+
+    /**
+     * Функция вычисляет соответствие договора минимальной сумме
+     * @param sumWithVAT - сумма с НДС
+     * @return
+     */
+    private boolean confirmMinSum(double sumWithVAT) {
+        return sumWithVAT > 1000;
+    }
+
+    /**
+     * Функция вычисляет сумму договора без налога
+     * @param sumVAT - сумма НДС
+     * @param sumWithVAT - сумма с НДС
+     * @return
+     */
+    private double calcSumWithoutVAT(double sumVAT, double sumWithVAT) {
+        return sumWithVAT - sumVAT;
+    }
+
+    /**
+     * Функция вычисляет ставку НДС
+     * @param sumWithVAT - сумма с НДС
+     * @param sumVAT - сумма НДС
+     * @return
+     */
+    private int calcRateVAT(double sumWithVAT, double sumVAT) {
+        return (int)Math.round(sumVAT * 100 / sumWithVAT);
     }
 
 

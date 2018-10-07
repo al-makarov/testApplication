@@ -47,7 +47,7 @@
         </tr>
         <tr>
             <td>Номер ТС</td>
-            <td><input type="text" ng-model="contractForm.vehicleId" /></td>
+            <td><input type="hidden" ng-model="contractForm.vehicleId" /></td>
         </tr>
         <tr>
             <td>Комментарий</td>
@@ -83,7 +83,7 @@
     <!-- $scope.contracts -->
     <tr ng-repeat="contract in contracts">
         <td>{{ contract.series }} {{ contract.number }}</td>
-        <td>{{ contract.typeContractId }}</td>
+        <td>{{ contract.typeContract.name }}</td>
         <td>{{ contract.dateSignature }}</td>
         <td>{{ contract.dateStart }}</td>
         <td>{{ contract.dateEnd }}</td>
@@ -92,7 +92,7 @@
         <td>{{ contract.sumVAT }}</td>
         <td>{{ contract.sumWithVAT }}</td>
         <td>{{ contract.conformMinSum }}</td>
-        <td>{{ contract.vehicleId }}</td>
+        <td>{{ contract.vehicle.name }}</td>
         <td>{{ contract.comment }}</td>
         <td>
             <a ng-click="editContract(contract)" class="edit-button">Редактировать</a>

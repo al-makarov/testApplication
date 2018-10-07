@@ -2,6 +2,8 @@ package com.magical.SinglePageAplication.dao;
 
 import com.magical.SinglePageAplication.model.ContractT1;
 import com.magical.SinglePageAplication.model.ContractT1Form;
+import com.magical.SinglePageAplication.model.ContractType;
+import com.magical.SinglePageAplication.model.Vehicle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -29,22 +31,33 @@ public class ContractT1JDBC implements ContractDAO{
     public ContractT1 getContract(Integer contrId) {
 
         System.out.println("ContractT1JDBC: getContract  is called");
-        final String QUERY_SQL = "SELECT * FROM contracts WHERE id = "+contrId;
+        final String QUERY_SQL = "SELECT contracts.id as contId, contracts.series as contSeries," +
+                "contracts.number as contNumber, contracts.typeContract as contTypeId, contracts.vehicle as contVehicleId," +
+                "contracts.dateStart as contDateStart, contracts.dateEnd as contDateEnd," +
+                "contracts.dateSignature as contDateSign, contracts.sumWithVAT as contSumWithVAT," +
+                "contracts.sumVAT as contSumVAT, contracts.comment as contComment, vehicles.number as vehNum," +
+                "contract_types.name as contTypeName FROM contracts, vehicles, contract_types " +
+                "WHERE contracts.typeContract = contract_types.id and contracts.vehicle = vehicles.id and id = "+contrId;
+
 
         List<ContractT1> contractList = this.jdbcTemplate.query(QUERY_SQL, new RowMapper<ContractT1>() {
             public ContractT1 mapRow(ResultSet resultSet, int rowNum) throws SQLException {
                 ContractT1 contractTemp = new ContractT1();
-                contractTemp.setId(resultSet.getInt("id"));
-                contractTemp.setSeries(resultSet.getString("series"));
-                contractTemp.setNumber(resultSet.getString("number"));
-                contractTemp.setTypeContractId(resultSet.getInt("typeContract"));
-                contractTemp.setVehicleId(resultSet.getInt("vehicle"));
-                contractTemp.setDateStart(resultSet.getDate("dateStart"));
-                contractTemp.setDateEnd(resultSet.getDate("dateEnd"));
-                contractTemp.setDateSignature(resultSet.getDate("dateSignature"));
-                contractTemp.setSumWithVAT(resultSet.getFloat("sumWithVAT"));
-                contractTemp.setSumVAT(resultSet.getFloat("sumVAT"));
-                contractTemp.setComment(resultSet.getString("comment"));
+                contractTemp.setId(resultSet.getInt("contId"));
+                contractTemp.setSeries(resultSet.getString("contSeries"));
+                contractTemp.setNumber(resultSet.getString("contNumber"));
+                ContractType contTypeTemp = new ContractType(resultSet.getInt("contTypeId"),
+                                                             resultSet.getString("contTypeName"));
+                contractTemp.setTypeContract(contTypeTemp);
+                Vehicle vehicleTemp = new Vehicle(resultSet.getInt("contVehicleId"),
+                                                  resultSet.getString("vehNum"));
+                contractTemp.setVehicle(vehicleTemp);
+                contractTemp.setDateStart(resultSet.getDate("contDateStart"));
+                contractTemp.setDateEnd(resultSet.getDate("contDateEnd"));
+                contractTemp.setDateSignature(resultSet.getDate("contDateSign"));
+                contractTemp.setSumWithVAT(resultSet.getFloat("contSumWithVAT"));
+                contractTemp.setSumVAT(resultSet.getFloat("contSumVAT"));
+                contractTemp.setComment(resultSet.getString("contComment"));
                 return contractTemp;
             }
         });
@@ -116,23 +129,31 @@ public class ContractT1JDBC implements ContractDAO{
 
     public List<ContractT1> getContracts() {
         System.out.println("ContractT1JDBC: getAllContracts  is called");
-        final String QUERY_SQL = "SELECT * FROM contracts";
+        final String QUERY_SQL = "SELECT contracts.id as contId, contracts.series as contSeries," +
+                "contracts.number as contNumber, contracts.typeContract as contTypeId, contracts.vehicle as contVehicleId," +
+                "contracts.dateStart as contDateStart, contracts.dateEnd as contDateEnd," +
+                "contracts.dateSignature as contDateSign, contracts.sumWithVAT as contSumWithVAT," +
+                "contracts.sumVAT as contSumVAT, contracts.comment as contComment, vehicles.number as vehNum," +
+                "contract_types.name as contTypeName FROM contracts, vehicles, contract_types " +
+                "WHERE contracts.typeContract = contract_types.id and contracts.vehicle = vehicles.id";
         List<ContractT1> contractList = this.jdbcTemplate.query(QUERY_SQL, new RowMapper<ContractT1>() {
             public ContractT1 mapRow(ResultSet resultSet, int rowNum) throws SQLException {
                 ContractT1 contractTemp = new ContractT1();
-
-                    contractTemp.setId(resultSet.getInt("id"));
-                    contractTemp.setSeries(resultSet.getString("series"));
-                    contractTemp.setNumber(resultSet.getString("number"));
-                    contractTemp.setTypeContractId(resultSet.getInt("typeContract"));
-                    contractTemp.setVehicleId(resultSet.getInt("vehicle"));
-                    contractTemp.setDateStart(resultSet.getDate("dateStart"));
-                    contractTemp.setDateEnd(resultSet.getDate("dateEnd"));
-                    contractTemp.setDateSignature(resultSet.getDate("dateSignature"));
-                    contractTemp.setSumWithVAT(resultSet.getDouble("sumWithVAT"));
-                    contractTemp.setSumVAT(resultSet.getDouble("sumVAT"));
-                    contractTemp.setComment(resultSet.getString("comment"));
-
+                contractTemp.setId(resultSet.getInt("contId"));
+                contractTemp.setSeries(resultSet.getString("contSeries"));
+                contractTemp.setNumber(resultSet.getString("contNumber"));
+                ContractType contTypeTemp = new ContractType(resultSet.getInt("contTypeId"),
+                        resultSet.getString("contTypeName"));
+                contractTemp.setTypeContract(contTypeTemp);
+                Vehicle vehicleTemp = new Vehicle(resultSet.getInt("contVehicleId"),
+                        resultSet.getString("vehNum"));
+                contractTemp.setVehicle(vehicleTemp);
+                contractTemp.setDateStart(resultSet.getDate("contDateStart"));
+                contractTemp.setDateEnd(resultSet.getDate("contDateEnd"));
+                contractTemp.setDateSignature(resultSet.getDate("contDateSign"));
+                contractTemp.setSumWithVAT(resultSet.getFloat("contSumWithVAT"));
+                contractTemp.setSumVAT(resultSet.getFloat("contSumVAT"));
+                contractTemp.setComment(resultSet.getString("contComment"));
                 return contractTemp;
             }
         });

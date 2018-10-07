@@ -65,7 +65,7 @@ app.controller("ContractController", function($scope, $http) {
         $scope.contractForm.id = contract.id;
         $scope.contractForm.series = contract.series;
         $scope.contractForm.number = contract.number;
-        $scope.contractForm.typeContractId = contract.typeContractId;
+        $scope.contractForm.typeContractId = contract.typeContract.id;
         $scope.contractForm.dateSignature = contract.dateSignature;
         $scope.contractForm.dateStart = contract.dateStart;
         $scope.contractForm.dateEnd = contract.dateEnd;
@@ -74,7 +74,7 @@ app.controller("ContractController", function($scope, $http) {
         $scope.contractForm.sumVAT = contract.sumVAT;
         $scope.contractForm.sumWithVAT = contract.sumWithVAT;
         /*$scope.contractForm.conformMinSum = contract.conformMinSum;*/
-        $scope.contractForm.vehicleId = contract.vehicleId;
+        $scope.contractForm.vehicleId = contract.vehicle.id;
         $scope.contractForm.comment = contract.comment;
     };
 

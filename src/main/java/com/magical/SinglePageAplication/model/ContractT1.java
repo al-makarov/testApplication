@@ -1,14 +1,13 @@
 package com.magical.SinglePageAplication.model;
-
-
 import java.util.Date;
+
 public class ContractT1 {
     private int id;
     private String series;
     private String number;
 
-    private int typeContractId;
-    private int vehicleId;
+    private ContractType typeContract;
+    private Vehicle vehicle;
 
     private Date dateSignature;
 
@@ -17,6 +16,9 @@ public class ContractT1 {
 
     private double sumVAT;
     private double sumWithVAT;
+    private double sumWithoutVAT;
+    private int rateVAT;
+    private boolean conformMinSum;
 
     private String comment;
 
@@ -49,12 +51,12 @@ public class ContractT1 {
         this.number = number;
     }
 
-    public int getTypeContractId() {
-        return typeContractId;
+    public ContractType getTypeContract() {
+        return typeContract;
     }
 
-    public void setTypeContractId(int typeContract) {
-        this.typeContractId = typeContract;
+    public void setTypeContract(ContractType typeContract) {
+        this.typeContract = typeContract;
     }
 
     public Date getDateSignature() {
@@ -100,12 +102,12 @@ public class ContractT1 {
 
 
 
-    public int getVehicleId() {
-        return vehicleId;
+    public Vehicle getVehicle() {
+        return vehicle;
     }
 
-    public void setVehicleId(int vehicle) {
-        this.vehicleId = vehicle;
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
     }
 
     public String getComment() {
@@ -116,7 +118,7 @@ public class ContractT1 {
         this.comment = comment;
     }
 
-    /*public double getSumWithoutVAT() {
+    public double getSumWithoutVAT() {
         return sumWithoutVAT;
     }
 
@@ -138,7 +140,7 @@ public class ContractT1 {
 
     public void setConformMinSum(boolean conformMinSum) {
         this.conformMinSum = conformMinSum;
-    }*/
+    }
 
 
 }
