@@ -4,6 +4,9 @@ package com.magical.SinglePageAplication.model;
 import javax.validation.constraints.*;
 import java.util.Date;
 
+/**
+ * Сущность формы данных договора Т1 (для взаимодействия с фронтэндом)
+ */
 public class ContractT1Form {
     private int id;
     @NotNull

@@ -1,5 +1,8 @@
 package com.magical.SinglePageAplication.model;
 
+/**
+ * Сущность транспортного средства
+ */
 public class Vehicle {
     private int id;
     private String name;

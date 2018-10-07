@@ -1,5 +1,8 @@
 package com.magical.SinglePageAplication.model;
 
+/**
+ * Сущность типа договора
+ */
 public class ContractType {
     private int id;
     private String name;

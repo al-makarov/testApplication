@@ -15,6 +15,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
+/**
+ * Реализация интерфейса DAO договора для JDBC
+ */
 @Repository
 public class ContractT1JDBC implements ContractDAO{
     @Autowired

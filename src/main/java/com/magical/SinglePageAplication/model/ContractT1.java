@@ -1,6 +1,9 @@
 package com.magical.SinglePageAplication.model;
 import java.util.Date;
 
+/**
+ * Сущность договора T1
+ */
 public class ContractT1 {
     private int id;
     private String series;

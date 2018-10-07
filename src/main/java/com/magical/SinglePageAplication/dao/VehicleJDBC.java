@@ -11,7 +11,9 @@ import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-
+/**
+ * Реализация интерфейса DAO транспортного средства для JDBC
+ */
 @Repository
 public class VehicleJDBC implements VehicleDAO {
     @Autowired
