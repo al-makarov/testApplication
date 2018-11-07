@@ -7,6 +7,9 @@ public class ContractType {
     private int id;
     private String name;
 
+    public ContractType() {
+
+    }
     public ContractType(int id, String name) {
         this.id = id;
         this.name = name;

@@ -1,8 +1,8 @@
 package com.magical.SinglePageAplication.controllers;
+
+import com.magical.SinglePageAplication.dto.ContractDTO;
 import com.magical.SinglePageAplication.model.ContractT1;
 import com.magical.SinglePageAplication.model.ContractT1Form;
-import com.magical.SinglePageAplication.model.ContractType;
-import com.magical.SinglePageAplication.model.Vehicle;
 import com.magical.SinglePageAplication.service.ContractService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,37 +16,9 @@ import java.util.List;
  * REST-контроллер для взаимодействия с фронтом
  */
 @RestController
-public class RESTController {
+public class ContractController {
     @Autowired
     private ContractService service;
-
-    /**
-     * Запрос на получение списка транспортных средств
-     * @return
-     */
-    @RequestMapping(value = "/vehicles", //
-            method = RequestMethod.GET, //
-            produces = { MediaType.APPLICATION_JSON_VALUE, //
-                    MediaType.APPLICATION_XML_VALUE })
-    @ResponseBody
-    public List<Vehicle> getVehicles() {
-        List<Vehicle> list = service.getVehicles();
-        return list;
-    }
-
-    /**
-     * Запрос на получение списка типов договоров
-     * @return
-     */
-    @RequestMapping(value = "/contract_types", //
-            method = RequestMethod.GET, //
-            produces = { MediaType.APPLICATION_JSON_VALUE, //
-                    MediaType.APPLICATION_XML_VALUE })
-    @ResponseBody
-    public List<ContractType> getContractTypes() {
-        List<ContractType> listContrTypes = service.getContractTypes();
-        return listContrTypes;
-    }
 
     /**
      * Запрос на получение списка договоров
@@ -57,8 +29,8 @@ public class RESTController {
             produces = { MediaType.APPLICATION_JSON_VALUE, //
                     MediaType.APPLICATION_XML_VALUE })
     @ResponseBody
-    public List<ContractT1> getContracts() {
-        List<ContractT1> list = service.getContracts();
+    public List<ContractDTO> getContracts() {
+        List<ContractDTO> list = service.getContracts();
         return list;
     }
 
@@ -72,7 +44,7 @@ public class RESTController {
             produces = { MediaType.APPLICATION_JSON_VALUE, //
                     MediaType.APPLICATION_XML_VALUE })
     @ResponseBody
-    public ContractT1 getContract(@PathVariable("contrId") Integer contrId) {
+    public ContractDTO getContract(@PathVariable("contrId") Integer contrId) {
         return service.getContract(contrId);
     }
 
@@ -86,7 +58,7 @@ public class RESTController {
             produces = { MediaType.APPLICATION_JSON_VALUE, //
                     MediaType.APPLICATION_XML_VALUE })
     @ResponseBody
-    boolean addContract(@RequestBody @Valid ContractT1Form contrForm) {
+    boolean addContract(@RequestBody @Valid ContractDTO contrForm) {
         System.out.println("(Service Side) Creating Contract with contrNo: " + contrForm.getSeries() + contrForm.getNumber());
         return service.addContract(contrForm);
     }
@@ -101,7 +73,7 @@ public class RESTController {
             produces = { MediaType.APPLICATION_JSON_VALUE, //
                     MediaType.APPLICATION_XML_VALUE })
     @ResponseBody
-    boolean  updateContract(@RequestBody @Valid ContractT1Form contrForm) {
+    boolean updateContract(@RequestBody @Valid ContractDTO contrForm) {
 
         System.out.println("(Service Side) Editing contract with Id: " + contrForm.getId());
         return service.updateContract(contrForm);

@@ -1,12 +1,14 @@
 package com.magical.SinglePageAplication.service;
 
 import com.magical.SinglePageAplication.dao.*;
+import com.magical.SinglePageAplication.dto.ContractDTO;
 import com.magical.SinglePageAplication.model.ContractT1;
-import com.magical.SinglePageAplication.model.ContractT1Form;
 import com.magical.SinglePageAplication.model.ContractType;
 import com.magical.SinglePageAplication.model.Vehicle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,21 +18,15 @@ import java.util.List;
 public class ContractService {
     @Autowired
     private ContractDAO contractDAO;
-    @Autowired
-    private VehicleDAO vehicleDAO;
-    @Autowired
-    private ContractTypeDAO contractTypeDAO;
 
     /**
      * Функция получения списка всех договоров {@link ContractT1}
      */
-    public List<ContractT1> getContracts() {
+    public List<ContractDTO> getContracts() {
+        List<ContractDTO> contractsDTO = new ArrayList<ContractDTO>();
         List<ContractT1> list = contractDAO.getContracts();
-
-        for(ContractT1 contract: list){
-            calculateParams(contract);
-        }
-        return list;
+        list.stream().forEach(i -> contractsDTO.add(convertToDTO(i)));
+        return contractsDTO;
     }
 
     /**
@@ -38,10 +34,9 @@ public class ContractService {
      * @param contractId - идентификатор договора
      * @return - экземпляр договора
      */
-    public ContractT1 getContract(int contractId) {
+    public ContractDTO getContract(int contractId) {
         ContractT1 contract = contractDAO.getContract(contractId);
-        calculateParams(contract);
-        return contract;
+        return convertToDTO(contract);
     }
 
     /**
@@ -49,8 +44,8 @@ public class ContractService {
      * @param newContract - экземпляр договора
      * @return
      */
-    public boolean addContract(ContractT1Form newContract) {
-        return contractDAO.addContract(newContract);
+    public boolean addContract(ContractDTO newContract) {
+        return contractDAO.addContract(convertFromDTO(newContract));
     }
 
     /**
@@ -67,53 +62,61 @@ public class ContractService {
      * @param updateContract - экземпляр формы договора
      * @return
      */
-    public boolean updateContract(ContractT1Form updateContract) {
+    public boolean updateContract(ContractDTO updateContract) {
 
-        return contractDAO.updateContract(updateContract);
+        return contractDAO.updateContract(convertFromDTO(updateContract));
     }
 
-    /**
-     * Функция получения списка транспортных средств {@link Vehicle}
-     * @return
-     */
-    public List<Vehicle> getVehicles() {
-        return vehicleDAO.getVehicles();
+    private ContractDTO convertToDTO(ContractT1 contract) {
+        ContractDTO contrDTO = new ContractDTO();
+        contrDTO.setId(contract.getId());
+        contrDTO.setSeries(contract.getSeries());
+        contrDTO.setNumber(contract.getNumber());
+        contrDTO.setVehicleId(contract.getVehicle().getId());
+        contrDTO.setTypeContractId(contract.getContractType().getId());
+        contrDTO.setVehicleName(contract.getVehicle().getName());
+        contrDTO.setContractTypeName(contract.getContractType().getName());
+        contrDTO.setDateSignature(contract.getDateSignature());
+        contrDTO.setDateStart(contract.getDateStart());
+        contrDTO.setDateEnd(contract.getDateEnd());
+        contrDTO.setSumVAT(contract.getSumVAT());
+        contrDTO.setSumWithVAT(contract.getSumWithVAT());
+        contrDTO.setComment(contract.getComment());
+        calculateParams(contrDTO);
+        return contrDTO;
     }
 
-    /**
-     * Функция возвращает транспортное средство по его идентификатору
-     * @param vehicleId - идентификатор транспортного средства
-     * @return
-     */
-    public Vehicle getVehicle(Integer vehicleId) {
-        return vehicleDAO.getVehicle(vehicleId);
+    private ContractT1 convertFromDTO(ContractDTO contractDTO) {
+        ContractT1 contract = new ContractT1();
+        contract.setId(contractDTO.getId());
+        contract.setSeries(contractDTO.getSeries());
+        contract.setNumber(contractDTO.getNumber());
+        Vehicle veh = new Vehicle();
+        veh.setId(contractDTO.getVehicleId());
+        veh.setName(contractDTO.getVehicleName());
+        contract.setVehicle(veh);
+        ContractType contrType = new ContractType();
+        contrType.setId(contractDTO.getTypeContractId());
+        contrType.setName(contractDTO.getContractTypeName());
+        contract.setContractType(contrType);
+        contract.setDateSignature(contractDTO.getDateSignature());
+        contract.setDateStart(contractDTO.getDateStart());
+        contract.setDateEnd(contractDTO.getDateEnd());
+        contract.setSumVAT(contractDTO.getSumVAT());
+        contract.setSumWithVAT(contractDTO.getSumWithVAT());
+        contract.setComment(contractDTO.getComment());
+        return contract;
     }
 
-    /**
-     * Функция возвращает тип договора по его идентификатору
-     * @param contrTypeId - идентификатор типа договора
-     * @return
-     */
-    public ContractType getContractType(Integer contrTypeId) {
-        return contractTypeDAO.getContractType(contrTypeId);
-    }
-
-    /**
-     * Функция возвращает список всех типов договоров
-     * @return
-     */
-    public List<ContractType> getContractTypes() {
-        return contractTypeDAO.getContractTypes();
-    }
 
     /**
      * Функция расчитывает вычисляемые параметры для договора
-     * @param contract - экземпляр договора
+     * @param contractDTO - экземпляр договора
      */
-    public void calculateParams(ContractT1 contract) {
-        contract.setSumWithoutVAT(calcSumWithoutVAT(contract.getSumVAT(),contract.getSumWithVAT()));
-        contract.setRateVAT(calcRateVAT(contract.getSumWithVAT(),contract.getSumVAT()));
-        contract.setConformMinSum(confirmMinSum(contract.getSumWithVAT()));
+    public void calculateParams(ContractDTO contractDTO) {
+        contractDTO.setSumWithoutVAT(calcSumWithoutVAT(contractDTO.getSumVAT(), contractDTO.getSumWithVAT()));
+        contractDTO.setRateVAT(calcRateVAT(contractDTO.getSumWithVAT(), contractDTO.getSumVAT()));
+        contractDTO.setConformMinSum(confirmMinSum(contractDTO.getSumWithVAT()));
     }
 
     /**

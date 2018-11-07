@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  * Основной контроллер для роутинга
  */
 @Controller
-public class HelloController {
+public class AuthController {
     @GetMapping(value = {"/"})
     public String index() {
         return "index";

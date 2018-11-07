@@ -1,7 +1,6 @@
 package com.magical.SinglePageAplication.dao;
 
 import com.magical.SinglePageAplication.model.ContractT1;
-import com.magical.SinglePageAplication.model.ContractT1Form;
 
 import java.util.List;
 
@@ -21,14 +20,14 @@ public interface ContractDAO {
      * @param contrForm - форма с данными нового договора
      * @return
      */
-    boolean addContract(ContractT1Form contrForm);
+    boolean addContract(ContractT1 contrForm);
 
     /**
      * Обновление данных договора
      * @param contr - форма с обновленными данными договора
      * @return
      */
-    boolean updateContract(ContractT1Form contr);
+    boolean updateContract(ContractT1 contr);
 
     /**
      * Удаление договора

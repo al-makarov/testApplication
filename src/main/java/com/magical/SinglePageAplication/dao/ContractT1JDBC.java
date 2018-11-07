@@ -1,7 +1,6 @@
 package com.magical.SinglePageAplication.dao;
 
 import com.magical.SinglePageAplication.model.ContractT1;
-import com.magical.SinglePageAplication.model.ContractT1Form;
 import com.magical.SinglePageAplication.model.ContractType;
 import com.magical.SinglePageAplication.model.Vehicle;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +50,7 @@ public class ContractT1JDBC implements ContractDAO{
                 contractTemp.setNumber(resultSet.getString("contNumber"));
                 ContractType contTypeTemp = new ContractType(resultSet.getInt("contTypeId"),
                                                              resultSet.getString("contTypeName"));
-                contractTemp.setTypeContract(contTypeTemp);
+                contractTemp.setContractType(contTypeTemp);
                 Vehicle vehicleTemp = new Vehicle(resultSet.getInt("contVehicleId"),
                                                   resultSet.getString("vehNum"));
                 contractTemp.setVehicle(vehicleTemp);
@@ -67,19 +66,19 @@ public class ContractT1JDBC implements ContractDAO{
         return contractList.get(0);
     }
 
-    public boolean addContract(ContractT1Form contrForm) {
+    public boolean addContract(ContractT1 contract) {
 
         final String INSERT_SQL = "INSERT INTO contracts(series, number, typeContract, dateSignature, "+
                                     "dateStart, dateEnd, sumVat,sumWithVat,vehicle,comment)"+
                                     " VALUES (?,?,?,?,?,?,?,?,?,?)";
         int result = jdbcTemplate.update(INSERT_SQL,
-            new Object[]{contrForm.getSeries(), contrForm.getNumber(),
-                    contrForm.getTypeContractId(), contrForm.getDateSignature(),
-                    contrForm.getDateStart(), contrForm.getDateEnd(),
-                    contrForm.getSumVAT(), contrForm.getSumWithVAT(),
-                    contrForm.getVehicleId(), contrForm.getComment()});
+                new Object[]{contract.getSeries(), contract.getNumber(),
+                        contract.getContractType().getId(), contract.getDateSignature(),
+                        contract.getDateStart(), contract.getDateEnd(),
+                        contract.getSumVAT(), contract.getSumWithVAT(),
+                        contract.getVehicle().getId(), contract.getComment()});
         if (result > 0) {
-            System.out.println("Contract is inserted: " + contrForm.getSeries()+contrForm.getNumber());
+            System.out.println("Contract is inserted: " + contract.getSeries() + contract.getNumber());
             return true;
         } else {
             return false;
@@ -88,7 +87,7 @@ public class ContractT1JDBC implements ContractDAO{
 
 
     //JDBC TEMPLATE UPDATE EXAMPLE
-    public boolean updateContract(ContractT1Form contractUpdate)  {
+    public boolean updateContract(ContractT1 contractUpdate) {
         System.out.println("contractT1JDBC: updateContract called");
 
         final String UPDATE_SQL = "UPDATE contracts SET series = ?, number = ?,"+
@@ -99,9 +98,9 @@ public class ContractT1JDBC implements ContractDAO{
 
         int result = jdbcTemplate.update(UPDATE_SQL,
                 new Object[]{contractUpdate.getSeries(), contractUpdate.getNumber(),
-                            contractUpdate.getTypeContractId(), contractUpdate.getDateSignature(),
+                        contractUpdate.getContractType().getId(), contractUpdate.getDateSignature(),
                             contractUpdate.getDateStart(), contractUpdate.getDateEnd(), contractUpdate.getSumVAT(),
-                            contractUpdate.getSumWithVAT(), contractUpdate.getVehicleId(), contractUpdate.getComment(),
+                        contractUpdate.getSumWithVAT(), contractUpdate.getVehicle().getId(), contractUpdate.getComment(),
                             contractUpdate.getId()});
 
         if (result > 0) {
@@ -147,7 +146,7 @@ public class ContractT1JDBC implements ContractDAO{
                 contractTemp.setNumber(resultSet.getString("contNumber"));
                 ContractType contTypeTemp = new ContractType(resultSet.getInt("contTypeId"),
                         resultSet.getString("contTypeName"));
-                contractTemp.setTypeContract(contTypeTemp);
+                contractTemp.setContractType(contTypeTemp);
                 Vehicle vehicleTemp = new Vehicle(resultSet.getInt("contVehicleId"),
                         resultSet.getString("vehNum"));
                 contractTemp.setVehicle(vehicleTemp);

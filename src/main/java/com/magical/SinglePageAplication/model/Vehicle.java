@@ -7,6 +7,9 @@ public class Vehicle {
     private int id;
     private String name;
 
+    public Vehicle() {
+
+    }
     public Vehicle(int id, String name) {
         this.id = id;
         this.name = name;
